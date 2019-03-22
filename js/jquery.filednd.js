@@ -140,13 +140,14 @@
 		},
 
 		createicon: function( widget ){
+			//create svg
 			var ns = 'http://www.w3.org/2000/svg',
 				svg = document.createElementNS( ns, 'svg' ),
 				path = document.createElementNS( ns, 'path' );
 			
 			svg.appendChild( path );
 			
-			//$svg[0]['viewBox'] = '0 0 24 24';
+			//setup svg
 			svg.setAttribute( 'xmlns', ns );
 			svg.setAttribute( 'width', '24' );
 			svg.setAttribute( 'height', '24' );
