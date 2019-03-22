@@ -1,5 +1,12 @@
+//
+//use jquery.widget
+//
 ( function( $ ) {
 
+	//is inner object
+	//naming route
+	// _[name] : property
+	// [name]() : method
 	var _widget = {
 		_namespace: 'custom',
 		
@@ -524,14 +531,19 @@
 				return _widget.events.cancel.call( this, $event, widget );
 			}
 		}
-	}
+	}// _widget end.
 
+	//create widget
 	var widget = $.widget( _widget.widgetfullname(), {
 		options: {
 			droparea: undefined,
+			//property 'dataTransfer.type'
 			types: [ 'Files' ],
+			//attr 'input[type=file].accept'
 			accept: [ 'image/*' ],
+			//droparea text
 			text: 'Tap to select a file or drag a file.',
+			//class
 			classes: {
 				'ui-droppable-input': 'ui-helper-hidden',
 				'ui-droppable': 'ui-widget-content ui-state-default ui-state-focus ui-corner-all',
