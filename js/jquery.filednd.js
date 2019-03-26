@@ -4,26 +4,26 @@
 ( function( $ ) {
 
 	//is inner object
-	//naming route
+	//naming rule
 	// _[name] : property
 	// [name]() : method
 	var _widget = {
 		_namespace: 'custom',
-		
-		namespace: function() {
+
+		namespace: function namespace() {
 			return this._namespace;
 		},
 
 		_widgetname: 'filednd',
-		
-		widgetname: function(){
+
+		widgetname: function widgetname(){
 			return this._widgetname;
 		},
-		
-		widgetfullname: function(){
+
+		widgetfullname: function widgetfullname(){
 			return this.namespace()+'.'+this.widgetname();
 		},
-		
+
 		_roles: {
 			//attr name
 			'name': 'data-filedrop-role',
@@ -125,14 +125,14 @@
 
 			var $icon = this.createicon( widget )
 				.attr( name, this.roles('droparea-icon') );
-			
+
 			var $text = $( '<span />' )
 				.attr( name, this.roles( 'droparea-text' ) )
 				.text( widget.option('text') || '' );
-			
+
 			$inner.append( $icon );
 			$inner.append( $text );
-			
+
 			$outer.append( $drop.append( $inner ) );
 			$elem.before( $outer );
 
@@ -142,7 +142,7 @@
 			widget._addClass( $elem, widget.option( 'classes.ui-droppable-input' ) );
 
 			this.addAllEvents( $drop, widget );
-			
+
 			return $drop;
 		},
 
@@ -151,24 +151,24 @@
 			var ns = 'http://www.w3.org/2000/svg',
 				svg = document.createElementNS( ns, 'svg' ),
 				path = document.createElementNS( ns, 'path' );
-			
+
 			svg.appendChild( path );
-			
+
 			//setup svg
 			svg.setAttribute( 'xmlns', ns );
 			svg.setAttribute( 'width', '24' );
 			svg.setAttribute( 'height', '24' );
 			svg.setAttribute( 'viewBox', '0 0 24 24' );
-			
+
 			path.setAttribute( 'd', 'M16.5,6V17.5A4,4 0 0,1 12.5,21.5A4,4 0 0,1 8.5,17.5V5A2.5,2.5 0 0,1 11,2.5A2.5,2.5 0 0,1 13.5,5V15.5A1,1 0 0,1 12.5,16.5A1,1 0 0,1 11.5,15.5V6H10V15.5A2.5,2.5 0 0,0 12.5,18A2.5,2.5 0 0,0 15,15.5V5A4,4 0 0,0 11,1A4,4 0 0,0 7,5V17.5A5.5,5.5 0 0,0 12.5,23A5.5,5.5 0 0,0 18,17.5V6H16.5Z' );
-			
+
 			var $icon = $( '<span />' ).attr( _widget.roles( 'name' ), _widget.roles( 'droparea-icon' ) );
-			
+
 			$icon.append( svg );
-			
+
 			return $icon;
 		},
-		
+
 		create: function _widget_create( widget ) {
 			var $document = $( document ),
 				name = this.namespace() + '.init';
@@ -310,7 +310,7 @@
 		},
 
 		addAllEvents: function($elem, widget){
-			
+
 			if( $elem[0].nodeType === Node.DOCUMENT_NODE ){
 				//document
 				widget._on( $elem, {
@@ -324,7 +324,7 @@
 						return _widget.events.cancel.call( this.document[ 0 ], $event, this );
 					}
 				} );
-				
+
 			}else if($elem[0].nodeType === Node.ELEMENT_NODE){
 				//HTML Element
 				widget._on( $elem, {
@@ -349,25 +349,25 @@
 					}
 				});
 			}
-			
+
 			return $elem;
 		},
-		
+
 		events: {
 			cancel: function _widget_events_cancel( $event, widget ) {
-				
+
 				$event.preventDefault();
-				
+
 				$event.stopPropagation();
-				
+
 				return false;
 			},
-			
+
 			dragover: function _widget_events_dragover( $event, widget ) {
-				
+
 				var //The Datatransfer object of the original event
 					dt = $event.originalEvent.dataTransfer;
-				
+
 				//Check if it is allowable Datatransfer
 				if ( _widget.IsAcceptDataTransferType( dt.types, widget ) === true ) {
 					dt.allowEffect = "copy";
@@ -376,17 +376,17 @@
 					dt.allowEffect = "none";
 					dt.dropEffect = "none";
 				}
-				
+
 				return _widget.events.cancel.call( this, $event, widget );
 			},
-			
+
 			dragenter: function( $event, widget ){
-				
+
 				var //Related elements (probably the element at the current pointer position)
 					related = $event.relatedTarget,
 					//Flag to be in the drag area
 					fromoutside = true;
-				
+
 				//When there are related elements
 				if( related ){
 					//---------------------------
@@ -398,7 +398,7 @@
 						role = _widget.roles('droparea'),
 						//Find a drop area that should be the parent element
 						$parent = $(related).closest( '['+name+'='+role+']' );
-					
+
 					//If a drop area is found as a parent element,
 					//it can be determined that it is a drag in the drop area
 					if( $parent.length !== 0 ){
@@ -410,11 +410,11 @@
 					//It seems that it went outside the HTML screen
 					//----------------------------------------------
 				}
-				
+
 				if( fromoutside === true ){
 					//When adding a class
 					//(Judging that it entered from outside the drag area, not dragging in the drag area)
-				
+
 					var //The Datatransfer object of the original event
 						dt = $event.originalEvent.dataTransfer,
 						//Class to add or delete
@@ -444,19 +444,19 @@
 						widget._trigger('dragfail', $event, widget);
 					}
 				}
-				
+
 				//Cancel the default behavior
 				return _widget.events.cancel.call( this, $event, widget );
 			},
-			
+
 			dragleave: function( $event, widget ) {
 				//console.log( $($event.target).attr( _widget.roles('name') )+'.dragleave' );
-				
+
 				var //Related elements (probably the element at the current pointer position)
 					related = $event.relatedTarget,
 					//Flag to be in the drag area
 					fromoutside = true;
-				
+
 				//When there are related elements
 				if( related ){
 					//---------------------------
@@ -468,12 +468,12 @@
 						role = _widget.roles('droparea'),
 						//Find a drop area that should be the parent element
 						$parent = $(related).closest( '['+name+'='+role+']' );
-					
+
 					if( $parent.length !== 0 ){
 						fromoutside = false;
 					}
 				}
-				
+
 				if( fromoutside === true ){
 					var css = [
 						widget.option( 'classes.ui-droppable-hover' ),
@@ -483,14 +483,14 @@
 
 					$drop.removeClass( css );
 				}
-				
+
 				return _widget.events.cancel.call( this, $event, widget );
 			},
 
 			drop: function _widget_events_drop( $event, widget ) {
-				
+
 				widget._trigger('dropbefore', $event, widget);
-				
+
 				var dt = $event.originalEvent.dataTransfer,
 					css = {
 						hover: widget.option( 'classes.ui-droppable-hover' ),
@@ -505,7 +505,7 @@
 						.addClass( css.done );
 
 					widget._trigger('dropdone', $event, widget);
-					
+
 					$drop.removeClass( css.done, 2000 );
 
 				} else {
@@ -514,12 +514,12 @@
 						.addClass( css.fail );
 
 					widget._trigger('dropfail', $event, widget);
-					
+
 					$drop.removeClass( css.fail, 2000 );
 				}
 
 				widget._trigger('dropafter', $event, widget);
-				
+
 				return _widget.events.cancel.call( this, $event, widget );
 			},
 
@@ -584,20 +584,20 @@
 			}
 			return this._super(element, keys, extra);
 		},
-		
+
 		_destroy: function() {
 			_widget.dropareaouter( this )
 				.remove();
 		},
-		
+
 		_enable: function(){
 			this.droparea().removeClass('ui-state-disabled');
 		},
-		
+
 		_disabled: function(){
 			this.droparea().addClass('ui-state-disabled');
 		}
-		
+
 	} );
 
 	$.extend( widget.prototype, {
