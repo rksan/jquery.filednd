@@ -2,14 +2,12 @@
 	$( function() {
 		var $document = $( document ),
 			$file = $document.find( 'input[type=file]' ),
-			$drop = $file.filednd();
-/*
-		$file.on( 'filedropdraghover', function($event, widget){
+			$filednd = $file.filednd();
 
-			console.log( 'drophover' );
+		$filednd.on('drop', function(){
+			alert('drop success!!');
+		});
 
-		} );
-		*/
 		$document.find( '#btn1' )
 			.on( 'click', function( $event ) {
 				$( 'input[type=file]' )

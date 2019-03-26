@@ -258,7 +258,7 @@
 					files: [],
 					regs: {}
 				},
-				_trim = $.trim;;
+				_trim = $.trim;
 
 			$.each( files, function( idx, file ) {
 				var symbole = Symbol( file );
