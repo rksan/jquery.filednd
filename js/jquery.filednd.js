@@ -596,6 +596,13 @@
 
 		_disabled: function(){
 			this.droparea().addClass('ui-state-disabled');
+		},
+
+		_dorp: function(){
+			var $droparea = this.droparea();
+
+			return this.options.dorp.call( $droparea[0] );
+			
 		}
 
 	} );

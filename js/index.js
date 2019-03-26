@@ -4,7 +4,7 @@
 			$file = $document.find( 'input[type=file]' ),
 			$filednd = $file.filednd();
 
-		$filednd.on('drop', function(){
+		$filednd.on('dropdone', function(){
 			alert('drop success!!');
 		});
 
