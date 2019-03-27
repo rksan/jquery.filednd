@@ -489,40 +489,56 @@
 
 			drop: function _widget_events_drop( $event, widget ) {
 
-				var flg = false;
+				var css = {
+						hover: widget.option( 'classes.ui-droppable-hover' ),
+						done: widget.option( 'classes.ui-droppable-done' ),
+						fail: widget.option( 'classes.ui-droppable-fail' )
+					},
+					add = [],
+					rmv = [css.hover],
+					flg = false;
 
 				flg = widget._trigger('dropbefore', $event, widget);
 
 				if( flg !== false ){
 
 					var dt = $event.originalEvent.dataTransfer,
-						css = {
-							hover: widget.option( 'classes.ui-droppable-hover' ),
-							done: widget.option( 'classes.ui-droppable-done' ),
-							fail: widget.option( 'classes.ui-droppable-fail' )
-						},
 						$drop = widget.droparea();
 
 					if ( _widget.IsAcceptFiles( dt.files, widget ) === true ) {
-						$drop
+						/*$drop
 							.removeClass( [ css.hover, css.fail ] )
-							.addClass( css.done );
+							.addClass( css.done );*/
+
+						add.push( css.done );
+						rmv.push( css.fail );
 
 						flg = widget._trigger('dropdone', $event, widget);
 
-						$drop.removeClass( css.done, 2000 );
+						//$drop.removeClass( css.done, 2000 );
 
 					} else {
-						$drop
+						/*$drop
 							.removeClass( [ css.hover, css.done ] )
-							.addClass( css.fail );
+							.addClass( css.fail );*/
 
+						add.push( css.fail );
+						rmv.push( css.done );
 						flg = widget._trigger('dropfail', $event, widget);
 
-						$drop.removeClass( css.fail, 2000 );
+						//$drop.removeClass( css.fail, 2000 );
 					}
 
 				};
+
+				if( rmv.length !== 0 ){
+					$drop.removeClass( rmv );
+				}
+				if( add.length !== 0 ){
+					$drop.addClass( add );
+					$drop.removeClass( add, 2000 );
+				}
+
 
 				flg = widget._trigger('dropalways', $event, widget);
 
