@@ -4,6 +4,7 @@
 			$file = $document.find( 'input[type=file]' ),
 			$filednd = $file.filednd();
 
+		//events demo
 		$filednd.filednd('on', {
 			'dropbefore': function($event){
 				console.log( $event.type );
@@ -15,7 +16,7 @@
 			'dropfail': function($event){
 				console.log( $event.type );
 			},
-			'dropafger': function($event){
+			'dropalways': function($event){
 				console.log( $event.type );
 			}
 		});

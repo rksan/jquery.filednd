@@ -492,39 +492,39 @@
 				var flg = false;
 
 				flg = widget._trigger('dropbefore', $event, widget);
-				console.log( $event.type +':'+ flg );
-				if( flg === true ){
+
+				if( flg !== false ){
+
+					var dt = $event.originalEvent.dataTransfer,
+						css = {
+							hover: widget.option( 'classes.ui-droppable-hover' ),
+							done: widget.option( 'classes.ui-droppable-done' ),
+							fail: widget.option( 'classes.ui-droppable-fail' )
+						},
+						$drop = widget.droparea();
+
+					if ( _widget.IsAcceptFiles( dt.files, widget ) === true ) {
+						$drop
+							.removeClass( [ css.hover, css.fail ] )
+							.addClass( css.done );
+
+						flg = widget._trigger('dropdone', $event, widget);
+
+						$drop.removeClass( css.done, 2000 );
+
+					} else {
+						$drop
+							.removeClass( [ css.hover, css.done ] )
+							.addClass( css.fail );
+
+						flg = widget._trigger('dropfail', $event, widget);
+
+						$drop.removeClass( css.fail, 2000 );
+					}
 
 				};
 
-				var dt = $event.originalEvent.dataTransfer,
-					css = {
-						hover: widget.option( 'classes.ui-droppable-hover' ),
-						done: widget.option( 'classes.ui-droppable-done' ),
-						fail: widget.option( 'classes.ui-droppable-fail' )
-					},
-					$drop = widget.droparea();
-
-				if ( _widget.IsAcceptFiles( dt.files, widget ) === true ) {
-					$drop
-						.removeClass( [ css.hover, css.fail ] )
-						.addClass( css.done );
-
-					widget._trigger('dropdone', $event, widget);
-
-					$drop.removeClass( css.done, 2000 );
-
-				} else {
-					$drop
-						.removeClass( [ css.hover, css.done ] )
-						.addClass( css.fail );
-
-					widget._trigger('dropfail', $event, widget);
-
-					$drop.removeClass( css.fail, 2000 );
-				}
-
-				widget._trigger('dropafter', $event, widget);
+				flg = widget._trigger('dropalways', $event, widget);
 
 				return _widget.events.cancel.call( this, $event, widget );
 			},
