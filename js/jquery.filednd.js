@@ -609,7 +609,23 @@
 			this.droparea().addClass('ui-state-disabled');
 		},
 
-		on: function(handlers){
+		//@param events
+		//@param [selector]
+		//@param [data]
+		//@param handler
+		on: function( events, selector, data, handler ){
+			var widgetname = _widdget.widgetname(),
+				name = (function(events, selector){
+					if( typeof selector === 'string' ){
+						return events+' '+selector
+					}else{
+						return events;
+					}
+				})(events, selector),
+				handlers = {
+				widgetname+name: handler,
+				data: data
+			};
 			return this._on(false, /*this.element, */handlers);
 		}
 

@@ -5,7 +5,7 @@
 			$filednd = $file.filednd();
 
 		$filednd.filednd('on', {
-			'filednddropdone': function(){
+			'dropdone': function(){
 				alert('drop success!!');
 			}
 		});
