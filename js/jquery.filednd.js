@@ -613,19 +613,19 @@
 		//@param [selector]
 		//@param [data]
 		//@param handler
-		on: function( events, selector, data, handler ){
+		on: function( handlers ){
 			var widgetname = _widdget.widgetname(),
-				name = (function(events, selector){
-					if( typeof selector === 'string' ){
-						return events+' '+selector
-					}else{
-						return events;
-					}
-				})(events, selector),
-				handlers = {
-				widgetname+name: handler,
-				data: data
-			};
+				reg = new RegExp('^'+widgetname);
+
+			for(var n in handlers){
+				if( n.test( reg ) === false ){
+					var h = handlers[n];
+					handlers[widgetname + n] = h;
+					handlers[n] = undefined;
+					delete handlers[n];
+				}
+			}
+
 			return this._on(false, /*this.element, */handlers);
 		}
 
