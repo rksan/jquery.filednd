@@ -618,7 +618,7 @@
 				reg = new RegExp('^'+widgetname);
 
 			for(var n in handlers){
-				if( n.test( reg ) === false ){
+				if( reg.test( n ) === false ){
 					var h = handlers[n];
 					handlers[widgetname + n] = h;
 					handlers[n] = undefined;

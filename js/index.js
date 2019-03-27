@@ -5,8 +5,17 @@
 			$filednd = $file.filednd();
 
 		$filednd.filednd('on', {
-			'dropdone': function(){
-				alert('drop success!!');
+			'dropbefore': function($event){
+				console.log( $event.type );
+			},
+			'dropdone': function($event){
+				console.log( $event.type );
+			},
+			'dropfail': function($event){
+				console.log( $event.type );
+			},
+			'dropafger': function($event){
+				console.log( $event.type );
 			}
 		});
 
