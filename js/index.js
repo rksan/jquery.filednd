@@ -7,6 +7,7 @@
 		$filednd.filednd('on', {
 			'dropbefore': function($event){
 				console.log( $event.type );
+				return false;
 			},
 			'dropdone': function($event){
 				console.log( $event.type );

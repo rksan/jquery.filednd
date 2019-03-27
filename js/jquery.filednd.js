@@ -489,7 +489,13 @@
 
 			drop: function _widget_events_drop( $event, widget ) {
 
-				widget._trigger('dropbefore', $event, widget);
+				var flg = false;
+
+				flg = widget._trigger('dropbefore', $event, widget);
+				console.log( $event.type +':'+ flg );
+				if( flg === true ){
+
+				};
 
 				var dt = $event.originalEvent.dataTransfer,
 					css = {
