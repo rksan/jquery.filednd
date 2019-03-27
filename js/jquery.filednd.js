@@ -585,24 +585,32 @@
 			return this._super(element, keys, extra);
 		},
 
+		//@override
+		_removeClass: function(element, keys, extra){
+			if( $.isArray(keys) ){
+				keys = keys.join(' ');
+			}
+			return this._super(element, keys, extra);
+		},
+
+		//@override
 		_destroy: function() {
 			_widget.dropareaouter( this )
 				.remove();
 		},
 
+		//@override
 		_enable: function(){
 			this.droparea().removeClass('ui-state-disabled');
 		},
 
+		//@override
 		_disabled: function(){
 			this.droparea().addClass('ui-state-disabled');
 		},
 
-		_dorp: function(){
-			var $droparea = this.droparea();
-
-			return this.options.dorp.call( $droparea[0] );
-			
+		on: function(suppressDisabledCheck, element, handlers){
+			return this._on(suppressDisabledCheck, element, handlers);
 		}
 
 	} );
