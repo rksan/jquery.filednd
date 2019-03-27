@@ -489,7 +489,8 @@
 
 			drop: function _widget_events_drop( $event, widget ) {
 
-				var css = {
+				var $drop = widget.droparea(),
+					css = {
 						hover: widget.option( 'classes.ui-droppable-hover' ),
 						done: widget.option( 'classes.ui-droppable-done' ),
 						fail: widget.option( 'classes.ui-droppable-fail' )
@@ -502,8 +503,7 @@
 
 				if( flg !== false ){
 
-					var dt = $event.originalEvent.dataTransfer,
-						$drop = widget.droparea();
+					var dt = $event.originalEvent.dataTransfer;
 
 					if ( _widget.IsAcceptFiles( dt.files, widget ) === true ) {
 						/*$drop
