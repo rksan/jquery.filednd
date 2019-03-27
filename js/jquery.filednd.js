@@ -614,7 +614,7 @@
 		//@param [data]
 		//@param handler
 		on: function( handlers ){
-			var widgetname = _widdget.widgetname(),
+			var widgetname = _widget.widgetname(),
 				reg = new RegExp('^'+widgetname);
 
 			for(var n in handlers){
