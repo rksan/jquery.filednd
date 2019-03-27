@@ -4,8 +4,10 @@
 			$file = $document.find( 'input[type=file]' ),
 			$filednd = $file.filednd();
 
-		$filednd.on('dropdone', function(){
-			alert('drop success!!');
+		$filednd.filednd('on', {
+			'dropdone': function(){
+				alert('drop success!!');
+			}
 		});
 
 		$document.find( '#btn1' )
