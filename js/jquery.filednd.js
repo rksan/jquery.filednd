@@ -609,8 +609,8 @@
 			this.droparea().addClass('ui-state-disabled');
 		},
 
-		on: function(suppressDisabledCheck, element, handlers){
-			return this._on(suppressDisabledCheck, element, handlers);
+		on: function(handlers){
+			return this._on(false, this.element, handlers);
 		}
 
 	} );
