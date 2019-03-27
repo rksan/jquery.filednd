@@ -610,7 +610,7 @@
 		},
 
 		on: function(handlers){
-			return this._on(false, this.element, handlers);
+			return this._on(false, /*this.element, */handlers);
 		}
 
 	} );
