@@ -3,8 +3,6 @@
 //
 ( function( $ ) {
 
-	var __widgetname = 'filednd';
-
 	//is inner object
 	//naming rule
 	// _[name] : property
@@ -16,7 +14,7 @@
 			return this._namespace;
 		},
 
-		_widgetname: __widgetname,
+		_widgetname: 'filednd',
 
 		widgetname: function _widget_widgetname() {
 			return this._widgetname;
@@ -24,34 +22,23 @@
 
 		widgetfullname: function _widget_widgetfullname() {
 			return this.namespace() + '.' + this.widgetname();
-		},
+		}
+	};
 
-		/*
-		_roles: {
-			//attr name
-			'name': 'data-filedrop-role',
-			//under : attr values
-			'input': 'filedrop-input',
-			'droparea': 'filedrop-droparea',
-			'droparea-outer': 'filedrop-droparea-outer',
-			'droparea-inner': 'filedrop-droparea-inner',
-			'droparea-icon': 'filedrop-droparea-icon',
-			'droparea-text': 'filedrop-droparea-text'
-		},
-*/
-		_roles: (function(w){
+	$.extend( _widget, {
+		_roles: ( function( w ) {
 			return {
 				//attr name
-				'name': 'data-'+w+'-role',
+				'name': 'data-' + w + '-role',
 				//under : attr values
-				'input': w+'-input',
-				'droparea': w+'-droparea',
-				'droparea-outer': w+'-droparea-outer',
-				'droparea-inner': w+'-droparea-inner',
-				'droparea-icon': w+'-droparea-icon',
-				'droparea-text': w+'-droparea-text'
+				'input': w + '-input',
+				'droparea': w + '-droparea',
+				'droparea-outer': w + '-droparea-outer',
+				'droparea-inner': w + '-droparea-inner',
+				'droparea-icon': w + '-droparea-icon',
+				'droparea-text': w + '-droparea-text'
 			};
-		})(__widgetname),
+		} )( this._widgetname ),
 
 		//getter .roles( [namespace][, roles] );
 		//setter .roles( roles );
@@ -610,7 +597,7 @@
 				return _widget.events.cancel.call( this, $event, widget );
 			}
 		}
-	} // _widget end.
+	} ); // _widget end.
 
 	//create widget
 	var widget = $.widget( _widget.widgetfullname(), {

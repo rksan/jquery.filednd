@@ -5,7 +5,7 @@
 			$filednd = $file.filednd();
 
 		var text = {
-			org: '',
+			org: $filednd.filednd( 'text' ),
 			before: '',
 			done: '',
 			fail: '',
@@ -14,8 +14,15 @@
 
 		//events demo
 		$filednd.filednd('on', {
+			'draghover': function($event){
+				text.before = text.org + ' : draghover';
+				this.text( text.before );
+			},
+			'dragfail': function($event){
+				text.before = text.org + ' : dragfail';
+				this.text( text.before );
+			},
 			'dropbefore': function($event){
-				text.org = this.text();
 				text.before = text.org + ' : dropbefore';
 				this.text( text.before );
 			},
@@ -28,7 +35,7 @@
 				this.text( text.fail );
 			},
 			'dropalways': function($event){
-				text.always = text.org + ' : dropalways';
+				text.always = text.org;
 				this.text( text.always );
 			}
 		});
