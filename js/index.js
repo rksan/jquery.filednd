@@ -4,20 +4,32 @@
 			$file = $document.find( 'input[type=file]' ),
 			$filednd = $file.filednd();
 
+		var text = {
+			org: '',
+			before: '',
+			done: '',
+			fail: '',
+			always: ''
+		};
+
 		//events demo
 		$filednd.filednd('on', {
 			'dropbefore': function($event){
-				console.log( $event.type );
-				return false;
+				text.org = this.text();
+				text.before = text.org + ' : dropbefore';
+				this.text( text.before );
 			},
 			'dropdone': function($event){
-				console.log( $event.type );
+				text.done = text.org + ' : dropdone';
+				this.text( text.done );
 			},
 			'dropfail': function($event){
-				console.log( $event.type );
+				text.fail = text.org + ' : dropfail';
+				this.text( text.fail );
 			},
 			'dropalways': function($event){
-				console.log( $event.type );
+				text.always = text.org + ' : dropdone';
+				this.text( text.always );
 			}
 		});
 

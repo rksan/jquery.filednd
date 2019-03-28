@@ -10,17 +10,17 @@
 	var _widget = {
 		_namespace: 'custom',
 
-		namespace: function namespace() {
+		namespace: function _widget_namespace() {
 			return this._namespace;
 		},
 
 		_widgetname: 'filednd',
 
-		widgetname: function widgetname(){
+		widgetname: function _widget_widgetname(){
 			return this._widgetname;
 		},
 
-		widgetfullname: function widgetfullname(){
+		widgetfullname: function _widget_widgetfullname(){
 			return this.namespace()+'.'+this.widgetname();
 		},
 
@@ -102,6 +102,15 @@
 			return $inner;
 		},
 
+		dropareatext: function( widget ){
+			var name = this.roles( 'name' );
+
+			var $drop = this.droparea( widget ),
+				$text = $drop.find( '[' + name + '=' + this.roles( 'droparea-text' ) + ']' );
+
+			return $text;
+		},
+
 		createdroparea: function _widget_createdroparea( widget ) {
 			var $elem = widget.element,
 				options = widget.options;
@@ -146,7 +155,7 @@
 			return $drop;
 		},
 
-		createicon: function( widget ){
+		createicon: function _widget_createicon( widget ){
 			//create svg
 			var ns = 'http://www.w3.org/2000/svg',
 				svg = document.createElementNS( ns, 'svg' ),
@@ -180,7 +189,7 @@
 		},
 
 		//@param types : DataTransfer.types
-		unacceptDataTransferType: function( types, widget ) {
+		unacceptDataTransferType: function _widget_unacceptDataTransferType( types, widget ) {
 			if ( !types ) {
 				return types;
 			}
@@ -228,7 +237,7 @@
 		},
 
 		//@param types : DataTransfer.types
-		IsAcceptDataTransferType: function( types, widget ) {
+		IsAcceptDataTransferType: function _widget_IsAcceptDataTransferType( types, widget ) {
 			var unaccept = this.unacceptDataTransferType( types, widget );
 
 			if ( unaccept ) {
@@ -239,7 +248,7 @@
 		},
 
 		//@param files : DataTransfer.files
-		unacceptFiles: function( files, widget ) {
+		unacceptFiles: function _widget_unacceptFiles( files, widget ) {
 			if ( !files ) {
 				return;
 			}
@@ -299,7 +308,7 @@
 			return param.files;
 		},
 
-		IsAcceptFiles: function( files, widget ) {
+		IsAcceptFiles: function _widget_IsAcceptFiles( files, widget ) {
 			var unaccept = this.unacceptFiles( files, widget );
 
 			if ( unaccept ) {
@@ -307,6 +316,43 @@
 			} else {
 				return true;
 			}
+		},
+
+		_eventName_Reg : undefined,
+
+		//@param handlers : object or String
+		createEventName: function _widget_createEventName( handlers ){
+			var widgetname = this.widgetname(),
+				reg = this._eventName_Reg;
+
+			if(!reg){
+				this._eventName_Reg = new RegExp('^' + widgetname);
+
+				return this.createEventName( handlers );
+
+			}else if( $.isPlainObject( handlers ) ){
+
+				//Add handler name if widget name does not exist.
+				for(var n in handlers){
+					if( reg.test( n ) === false ){
+						var h = handlers[n];
+						handlers[widgetname + n] = h;
+						handlers[n] = undefined;
+						delete handlers[n];
+					}
+				}
+
+				return handlers;
+
+			}else{ //is string
+				//Add handler name if widget name does not exist.
+				if( reg.test( handlers ) === false ){
+					handlers = widgetname + handlers;
+				}
+
+				return handlers;
+			}
+
 		},
 
 		addAllEvents: function($elem, widget){
@@ -380,7 +426,7 @@
 				return _widget.events.cancel.call( this, $event, widget );
 			},
 
-			dragenter: function( $event, widget ){
+			dragenter: function _widget_events_dragenter( $event, widget ){
 
 				var //Related elements (probably the element at the current pointer position)
 					related = $event.relatedTarget,
@@ -449,7 +495,7 @@
 				return _widget.events.cancel.call( this, $event, widget );
 			},
 
-			dragleave: function( $event, widget ) {
+			dragleave: function _widget_events_dragleave( $event, widget ) {
 				//console.log( $($event.target).attr( _widget.roles('name') )+'.dragleave' );
 
 				var //Related elements (probably the element at the current pointer position)
@@ -506,27 +552,18 @@
 					var dt = $event.originalEvent.dataTransfer;
 
 					if ( _widget.IsAcceptFiles( dt.files, widget ) === true ) {
-						/*$drop
-							.removeClass( [ css.hover, css.fail ] )
-							.addClass( css.done );*/
 
 						add.push( css.done );
 						rmv.push( css.fail );
 
 						flg = widget._trigger('dropdone', $event, widget);
 
-						//$drop.removeClass( css.done, 2000 );
-
 					} else {
-						/*$drop
-							.removeClass( [ css.hover, css.done ] )
-							.addClass( css.fail );*/
 
 						add.push( css.fail );
 						rmv.push( css.done );
 						flg = widget._trigger('dropfail', $event, widget);
 
-						//$drop.removeClass( css.fail, 2000 );
 					}
 
 				};
@@ -538,7 +575,6 @@
 					$drop.addClass( add );
 					$drop.removeClass( add, 2000 );
 				}
-
 
 				flg = widget._trigger('dropalways', $event, widget);
 
@@ -579,7 +615,7 @@
 			}
 		},
 
-		_init: function() {
+		_init: function widget_init() {
 			var $document = $( this.document ),
 				selector = this.options.droparea,
 				$drop;
@@ -600,7 +636,7 @@
 		},
 
 		//@override
-		_addClass: function(element, keys, extra){
+		_addClass: function widget_addClass(element, keys, extra){
 			if( $.isArray(keys) ){
 				keys = keys.join(' ');
 			}
@@ -608,7 +644,7 @@
 		},
 
 		//@override
-		_removeClass: function(element, keys, extra){
+		_removeClass: function widget_removeClass(element, keys, extra){
 			if( $.isArray(keys) ){
 				keys = keys.join(' ');
 			}
@@ -616,45 +652,55 @@
 		},
 
 		//@override
-		_destroy: function() {
+		_destroy: function widget_destroy() {
 			_widget.dropareaouter( this )
 				.remove();
 		},
 
 		//@override
-		_enable: function(){
+		_enable: function widget_enable(){
 			this.droparea().removeClass('ui-state-disabled');
 		},
 
 		//@override
-		_disabled: function(){
+		_disabled: function widget_disabled(){
 			this.droparea().addClass('ui-state-disabled');
 		},
 
-		//@param events
-		//@param [selector]
-		//@param [data]
-		//@param handler
-		on: function( handlers ){
-			var widgetname = _widget.widgetname(),
-				reg = new RegExp('^'+widgetname);
-
-			for(var n in handlers){
-				if( reg.test( n ) === false ){
-					var h = handlers[n];
-					handlers[widgetname + n] = h;
-					handlers[n] = undefined;
-					delete handlers[n];
-				}
-			}
+		//@original
+		//@param handlers : object
+		//	handlers : {
+		//		eventType : function($event){}
+		//	}
+		on: function widget_on( handlers ){
+			handlers = _widget.createEventName( handlers );
 
 			return this._on(false, /*this.element, */handlers);
+		},
+
+		//@original
+		//@param eventName : String
+		off: function widget_off(eventName){
+			eventName = _widget.createEventName( eventName );
+
+			return this._off(this.element, eventName);
+		},
+
+		text: function widget_text(text){
+			var $text = _widget.dropateatext( this );
+
+			if( text ){
+				$text.text( text );
+				return this;
+			}else{
+				return $text.text();
+			}
 		}
 
 	} );
 
 	$.extend( widget.prototype, {
-		droparea: function() {
+		droparea: function widget_droparea() {
 			return _widget.droparea( this );
 		}
 	} );
