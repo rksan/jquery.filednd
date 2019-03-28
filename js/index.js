@@ -28,7 +28,7 @@
 				this.text( text.fail );
 			},
 			'dropalways': function($event){
-				text.always = text.org + ' : dropdone';
+				text.always = text.org + ' : dropalways';
 				this.text( text.always );
 			}
 		});
