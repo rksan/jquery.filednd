@@ -3,6 +3,8 @@
 //
 ( function( $ ) {
 
+	var __widgetname = 'filednd';
+
 	//is inner object
 	//naming rule
 	// _[name] : property
@@ -14,16 +16,17 @@
 			return this._namespace;
 		},
 
-		_widgetname: 'filednd',
+		_widgetname: __widgetname,
 
-		widgetname: function _widget_widgetname(){
+		widgetname: function _widget_widgetname() {
 			return this._widgetname;
 		},
 
-		widgetfullname: function _widget_widgetfullname(){
-			return this.namespace()+'.'+this.widgetname();
+		widgetfullname: function _widget_widgetfullname() {
+			return this.namespace() + '.' + this.widgetname();
 		},
 
+		/*
 		_roles: {
 			//attr name
 			'name': 'data-filedrop-role',
@@ -35,6 +38,20 @@
 			'droparea-icon': 'filedrop-droparea-icon',
 			'droparea-text': 'filedrop-droparea-text'
 		},
+*/
+		_roles: (function(w){
+			return {
+				//attr name
+				'name': 'data-'+w+'-role',
+				//under : attr values
+				'input': w+'-input',
+				'droparea': w+'-droparea',
+				'droparea-outer': w+'-droparea-outer',
+				'droparea-inner': w+'-droparea-inner',
+				'droparea-icon': w+'-droparea-icon',
+				'droparea-text': w+'-droparea-text'
+			};
+		})(__widgetname),
 
 		//getter .roles( [namespace][, roles] );
 		//setter .roles( roles );
@@ -48,6 +65,7 @@
 				if ( typeof arguments[ 0 ] === 'string' ) {
 					//get
 					namespace = arguments[ 0 ];
+
 					roles = ( arguments[ 1 ] || this._roles );
 
 					var names = namespace.split( '.' );
@@ -102,7 +120,7 @@
 			return $inner;
 		},
 
-		dropareatext: function( widget ){
+		dropareatext: function( widget ) {
 			var name = this.roles( 'name' );
 
 			var $drop = this.droparea( widget ),
@@ -133,11 +151,11 @@
 			widget._addClass( $inner, widget.option( 'classes.ui-droppable-text' ) );
 
 			var $icon = this.createicon( widget )
-				.attr( name, this.roles('droparea-icon') );
+				.attr( name, this.roles( 'droparea-icon' ) );
 
 			var $text = $( '<span />' )
 				.attr( name, this.roles( 'droparea-text' ) )
-				.text( widget.option('text') || '' );
+				.text( widget.option( 'text' ) || '' );
 
 			$inner.append( $icon );
 			$inner.append( $text );
@@ -155,7 +173,7 @@
 			return $drop;
 		},
 
-		createicon: function _widget_createicon( widget ){
+		createicon: function _widget_createicon( widget ) {
 			//create svg
 			var ns = 'http://www.w3.org/2000/svg',
 				svg = document.createElementNS( ns, 'svg' ),
@@ -171,7 +189,8 @@
 
 			path.setAttribute( 'd', 'M16.5,6V17.5A4,4 0 0,1 12.5,21.5A4,4 0 0,1 8.5,17.5V5A2.5,2.5 0 0,1 11,2.5A2.5,2.5 0 0,1 13.5,5V15.5A1,1 0 0,1 12.5,16.5A1,1 0 0,1 11.5,15.5V6H10V15.5A2.5,2.5 0 0,0 12.5,18A2.5,2.5 0 0,0 15,15.5V5A4,4 0 0,0 11,1A4,4 0 0,0 7,5V17.5A5.5,5.5 0 0,0 12.5,23A5.5,5.5 0 0,0 18,17.5V6H16.5Z' );
 
-			var $icon = $( '<span />' ).attr( _widget.roles( 'name' ), _widget.roles( 'droparea-icon' ) );
+			var $icon = $( '<span />' )
+				.attr( _widget.roles( 'name' ), _widget.roles( 'droparea-icon' ) );
 
 			$icon.append( svg );
 
@@ -318,35 +337,35 @@
 			}
 		},
 
-		_eventName_Reg : undefined,
+		_eventName_Reg: undefined,
 
 		//@param handlers : object or String
-		createEventName: function _widget_createEventName( handlers ){
+		createEventName: function _widget_createEventName( handlers ) {
 			var widgetname = this.widgetname(),
 				reg = this._eventName_Reg;
 
-			if(!reg){
-				this._eventName_Reg = new RegExp('^' + widgetname);
+			if ( !reg ) {
+				this._eventName_Reg = new RegExp( '^' + widgetname );
 
 				return this.createEventName( handlers );
 
-			}else if( $.isPlainObject( handlers ) ){
+			} else if ( $.isPlainObject( handlers ) ) {
 
 				//Add handler name if widget name does not exist.
-				for(var n in handlers){
-					if( reg.test( n ) === false ){
-						var h = handlers[n];
-						handlers[widgetname + n] = h;
-						handlers[n] = undefined;
-						delete handlers[n];
+				for ( var n in handlers ) {
+					if ( reg.test( n ) === false ) {
+						var h = handlers[ n ];
+						handlers[ widgetname + n ] = h;
+						handlers[ n ] = undefined;
+						delete handlers[ n ];
 					}
 				}
 
 				return handlers;
 
-			}else{ //is string
+			} else { //is string
 				//Add handler name if widget name does not exist.
-				if( reg.test( handlers ) === false ){
+				if ( reg.test( handlers ) === false ) {
 					handlers = widgetname + handlers;
 				}
 
@@ -355,9 +374,9 @@
 
 		},
 
-		addAllEvents: function($elem, widget){
+		addAllEvents: function( $elem, widget ) {
 
-			if( $elem[0].nodeType === Node.DOCUMENT_NODE ){
+			if ( $elem[ 0 ].nodeType === Node.DOCUMENT_NODE ) {
 				//document
 				widget._on( $elem, {
 					'dragover': function( $event ) {
@@ -371,7 +390,7 @@
 					}
 				} );
 
-			}else if($elem[0].nodeType === Node.ELEMENT_NODE){
+			} else if ( $elem[ 0 ].nodeType === Node.ELEMENT_NODE ) {
 				//HTML Element
 				widget._on( $elem, {
 					'dragover': function( $event ) {
@@ -393,7 +412,7 @@
 					'click': function( $event ) {
 						return _widget.events.click.call( this.element[ 0 ], $event, this );
 					}
-				});
+				} );
 			}
 
 			return $elem;
@@ -418,7 +437,7 @@
 				if ( _widget.IsAcceptDataTransferType( dt.types, widget ) === true ) {
 					dt.allowEffect = "copy";
 					dt.dropEffect = "copy";
-				}else{
+				} else {
 					dt.allowEffect = "none";
 					dt.dropEffect = "none";
 				}
@@ -426,7 +445,7 @@
 				return _widget.events.cancel.call( this, $event, widget );
 			},
 
-			dragenter: function _widget_events_dragenter( $event, widget ){
+			dragenter: function _widget_events_dragenter( $event, widget ) {
 
 				var //Related elements (probably the element at the current pointer position)
 					related = $event.relatedTarget,
@@ -434,30 +453,31 @@
 					fromoutside = true;
 
 				//When there are related elements
-				if( related ){
+				if ( related ) {
 					//---------------------------
 					//I'm still dragging in HTML
 					//---------------------------
 					var //Attribute name
-						name = _widget.roles('name'),
+						name = _widget.roles( 'name' ),
 						//Attribute value
-						role = _widget.roles('droparea'),
+						role = _widget.roles( 'droparea' ),
 						//Find a drop area that should be the parent element
-						$parent = $(related).closest( '['+name+'='+role+']' );
+						$parent = $( related )
+						.closest( '[' + name + '=' + role + ']' );
 
 					//If a drop area is found as a parent element,
 					//it can be determined that it is a drag in the drop area
-					if( $parent.length !== 0 ){
+					if ( $parent.length !== 0 ) {
 						//It is a drag in the drop area
 						fromoutside = false;
 					}
-				}else{
+				} else {
 					//----------------------------------------------
 					//It seems that it went outside the HTML screen
 					//----------------------------------------------
 				}
 
-				if( fromoutside === true ){
+				if ( fromoutside === true ) {
 					//When adding a class
 					//(Judging that it entered from outside the drag area, not dragging in the drag area)
 
@@ -477,7 +497,7 @@
 						$drop.removeClass( css.fail );
 						$drop.addClass( css.hover );
 
-						widget._trigger('draghover', $event, widget);
+						widget._trigger( 'draghover', $event, widget );
 
 					} else {
 						//drag fail
@@ -487,7 +507,7 @@
 						$drop.removeClass( css.hover );
 						$drop.addClass( css.fail );
 
-						widget._trigger('dragfail', $event, widget);
+						widget._trigger( 'dragfail', $event, widget );
 					}
 				}
 
@@ -504,28 +524,29 @@
 					fromoutside = true;
 
 				//When there are related elements
-				if( related ){
+				if ( related ) {
 					//---------------------------
 					//I'm still dragging in HTML
 					//---------------------------
 					var //Attribute name
-						name = _widget.roles('name'),
+						name = _widget.roles( 'name' ),
 						//Attribute value
-						role = _widget.roles('droparea'),
+						role = _widget.roles( 'droparea' ),
 						//Find a drop area that should be the parent element
-						$parent = $(related).closest( '['+name+'='+role+']' );
+						$parent = $( related )
+						.closest( '[' + name + '=' + role + ']' );
 
-					if( $parent.length !== 0 ){
+					if ( $parent.length !== 0 ) {
 						fromoutside = false;
 					}
 				}
 
-				if( fromoutside === true ){
+				if ( fromoutside === true ) {
 					var css = [
-						widget.option( 'classes.ui-droppable-hover' ),
-						widget.option( 'classes.ui-droppable-fail' )
-					],
-					$drop = widget.droparea();
+							widget.option( 'classes.ui-droppable-hover' ),
+							widget.option( 'classes.ui-droppable-fail' )
+						],
+						$drop = widget.droparea();
 
 					$drop.removeClass( css );
 				}
@@ -542,12 +563,12 @@
 						fail: widget.option( 'classes.ui-droppable-fail' )
 					},
 					add = [],
-					rmv = [css.hover],
+					rmv = [ css.hover ],
 					flg = false;
 
-				flg = widget._trigger('dropbefore', $event, widget);
+				flg = widget._trigger( 'dropbefore', $event, widget );
 
-				if( flg !== false ){
+				if ( flg !== false ) {
 
 					var dt = $event.originalEvent.dataTransfer;
 
@@ -556,27 +577,27 @@
 						add.push( css.done );
 						rmv.push( css.fail );
 
-						flg = widget._trigger('dropdone', $event, widget);
+						flg = widget._trigger( 'dropdone', $event, widget );
 
 					} else {
 
 						add.push( css.fail );
 						rmv.push( css.done );
-						flg = widget._trigger('dropfail', $event, widget);
+						flg = widget._trigger( 'dropfail', $event, widget );
 
 					}
 
 				};
 
-				if( rmv.length !== 0 ){
+				if ( rmv.length !== 0 ) {
 					$drop.removeClass( rmv );
 				}
-				if( add.length !== 0 ){
+				if ( add.length !== 0 ) {
 					$drop.addClass( add );
 					$drop.removeClass( add, 2000 );
 				}
 
-				flg = widget._trigger('dropalways', $event, widget);
+				flg = widget._trigger( 'dropalways', $event, widget );
 
 				return _widget.events.cancel.call( this, $event, widget );
 			},
@@ -589,7 +610,7 @@
 				return _widget.events.cancel.call( this, $event, widget );
 			}
 		}
-	}// _widget end.
+	} // _widget end.
 
 	//create widget
 	var widget = $.widget( _widget.widgetfullname(), {
@@ -636,19 +657,19 @@
 		},
 
 		//@override
-		_addClass: function widget_addClass(element, keys, extra){
-			if( $.isArray(keys) ){
-				keys = keys.join(' ');
+		_addClass: function widget_addClass( element, keys, extra ) {
+			if ( $.isArray( keys ) ) {
+				keys = keys.join( ' ' );
 			}
-			return this._super(element, keys, extra);
+			return this._super( element, keys, extra );
 		},
 
 		//@override
-		_removeClass: function widget_removeClass(element, keys, extra){
-			if( $.isArray(keys) ){
-				keys = keys.join(' ');
+		_removeClass: function widget_removeClass( element, keys, extra ) {
+			if ( $.isArray( keys ) ) {
+				keys = keys.join( ' ' );
 			}
-			return this._super(element, keys, extra);
+			return this._super( element, keys, extra );
 		},
 
 		//@override
@@ -658,13 +679,15 @@
 		},
 
 		//@override
-		_enable: function widget_enable(){
-			this.droparea().removeClass('ui-state-disabled');
+		_enable: function widget_enable() {
+			this.droparea()
+				.removeClass( 'ui-state-disabled' );
 		},
 
 		//@override
-		_disabled: function widget_disabled(){
-			this.droparea().addClass('ui-state-disabled');
+		_disabled: function widget_disabled() {
+			this.droparea()
+				.addClass( 'ui-state-disabled' );
 		},
 
 		//@original
@@ -672,27 +695,27 @@
 		//	handlers : {
 		//		eventType : function($event){}
 		//	}
-		on: function widget_on( handlers ){
+		on: function widget_on( handlers ) {
 			handlers = _widget.createEventName( handlers );
 
-			return this._on(false, /*this.element, */handlers);
+			return this._on( false, /*this.element, */ handlers );
 		},
 
 		//@original
 		//@param eventName : String
-		off: function widget_off(eventName){
+		off: function widget_off( eventName ) {
 			eventName = _widget.createEventName( eventName );
 
-			return this._off(this.element, eventName);
+			return this._off( this.element, eventName );
 		},
 
-		text: function widget_text(text){
+		text: function widget_text( text ) {
 			var $text = _widget.dropareatext( this );
 
-			if( text ){
+			if ( text ) {
 				$text.text( text );
 				return this;
-			}else{
+			} else {
 				return $text.text();
 			}
 		}
