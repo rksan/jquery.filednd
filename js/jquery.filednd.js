@@ -687,7 +687,7 @@
 		},
 
 		text: function widget_text(text){
-			var $text = _widget.dropateatext( this );
+			var $text = _widget.dropareatext( this );
 
 			if( text ){
 				$text.text( text );
