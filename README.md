@@ -144,8 +144,6 @@ jQuery.Widget で original event を定義するには、event 名に widget 名
 
 $event : jQuery Event object
 
-jQuery のイベントオブジェクト
-
 @param
 
 widget : jQuery FileDnD
@@ -160,8 +158,6 @@ widget : jQuery FileDnD
 @param
 
 $event : jQuery Event object
-
-jQuery のイベントオブジェクト
 
 @param
 
@@ -178,8 +174,6 @@ widget : jQuery FileDnD
 @param
 
 $event : jQuery Event object
-
-jQuery のイベントオブジェクト
 
 @param
 
@@ -199,8 +193,6 @@ widget : jQuery FileDnD
 
 $event : jQuery Event object
 
-jQuery のイベントオブジェクト
-
 @param
 
 widget : jQuery FileDnD
@@ -218,8 +210,6 @@ Drop される前に判定しろと言いたいところですが、 `native dro
 
 $event : jQuery Event object
 
-jQuery のイベントオブジェクト
-
 @param
 
 widget : jQuery FileDnD
@@ -232,8 +222,6 @@ widget : jQuery FileDnD
 @param
 
 $event : jQuery Event object
-
-jQuery のイベントオブジェクト
 
 @param
 
