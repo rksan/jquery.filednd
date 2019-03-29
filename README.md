@@ -33,7 +33,7 @@ HTML上の `<form>` 要素以下に `<input type="file">` 要素を配置する�
 
 # API
 
-#### options
+### options
 
 ##### types
 
@@ -46,7 +46,7 @@ Default : ['File']
 
 許可するファイルの種類。
 
-#### events
+### events
 
 ##### draghover
 
