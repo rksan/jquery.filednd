@@ -1,8 +1,8 @@
 /*
-* jquery.filednd.js -v0.0.1
-* use "jQuery-ui -v1.12.1". need to include "widget.js" in it.
-* Copyright(C) rksan(https://github.com/rksan/jquery.filednd.git); MIT License.
-*/
+ * jquery.filednd.js -v0.0.1
+ * use "jQuery-ui -v1.12.1". need to include "widget.js" in it.
+ * Copyright(C) rksan(https://github.com/rksan/jquery.filednd.git); MIT License.
+ */
 ( function( $ ) {
 
 	//is inner object
@@ -410,8 +410,10 @@
 		events: {
 			cancel: function _widget_events_cancel( $event, widget ) {
 
+				//Cancel default event behavior.
 				$event.preventDefault();
 
+				//Stop bubbling events.
 				$event.stopPropagation();
 
 				return false;
@@ -420,6 +422,7 @@
 			dragover: function _widget_events_dragover( $event, widget ) {
 
 				var //The Datatransfer object of the original event
+					//@see reference DataTransfer|MDN (https://developer.mozilla.org/ja/docs/Web/API/DataTransfer)
 					dt = $event.originalEvent.dataTransfer;
 
 				//Check if it is allowable Datatransfer
@@ -505,7 +508,6 @@
 			},
 
 			dragleave: function _widget_events_dragleave( $event, widget ) {
-				//console.log( $($event.target).attr( _widget.roles('name') )+'.dragleave' );
 
 				var //Related elements (probably the element at the current pointer position)
 					related = $event.relatedTarget,
@@ -602,7 +604,9 @@
 	} ); // _widget end.
 
 	//create widget
+	//@see reference jQuery Widget Factory(http://api.jqueryui.com/jQuery.widget/)
 	var widget = $.widget( _widget.widgetfullname(), {
+		//@override
 		options: {
 			droparea: undefined,
 			//property 'dataTransfer.type'
@@ -625,6 +629,7 @@
 			}
 		},
 
+		//@override
 		_init: function widget_init() {
 			var $document = $( this.document ),
 				selector = this.options.droparea,
@@ -719,8 +724,11 @@
 		}
 	} );
 
-	$(function(){
-		$(document).find('form').find('input[type=file]')[_widget.widgetname()]();
-	});
+	$( function() {
+		//call initial
+		$( document )
+			.find( 'form' )
+			.find( 'input[type=file]' )[ _widget.widgetname() ]();
+	} );
 
 } )( window.jQuery );
