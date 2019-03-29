@@ -9,7 +9,7 @@ PC向け。
 
 HTML上の `<form>` 要素以下に `<input type="file">` 要素を配置するだけです。
 
-デモ(https://rksan.github.io/index.html)
+デモ(https://rksan.github.io/jquery.filednd/index.html)
 
 # CDN
 
