@@ -2,6 +2,7 @@
 	$( function() {
 		var $document = $( document ),
 			$file = $document.find( 'input[type=file]' ),
+			//Initialize
 			$filednd = $file.filednd();
 
 		var text = {
@@ -14,29 +15,29 @@
 
 		//events demo
 		$filednd.filednd('on', {
-			'draghover': function($event){
+			'draghover': function($event, widget){
 				text.before = text.org + ' : draghover';
-				this.text( text.before );
+				widget.text( text.before );
 			},
-			'dragfail': function($event){
+			'dragfail': function($event, widget){
 				text.before = text.org + ' : dragfail';
-				this.text( text.before );
+				widget.text( text.before );
 			},
-			'dropbefore': function($event){
+			'dropbefore': function($event, widget){
 				text.before = text.org + ' : dropbefore';
-				this.text( text.before );
+				widget.text( text.before );
 			},
-			'dropdone': function($event){
+			'dropdone': function($event, widget){
 				text.done = text.org + ' : dropdone';
-				this.text( text.done );
+				widget.text( text.done );
 			},
-			'dropfail': function($event){
+			'dropfail': function($event, widget){
 				text.fail = text.org + ' : dropfail';
-				this.text( text.fail );
+				widget.text( text.fail );
 			},
-			'dropalways': function($event){
+			'dropalways': function($event, widget){
 				text.always = text.org;
-				this.text( text.always );
+				widget.text( text.always );
 			}
 		});
 

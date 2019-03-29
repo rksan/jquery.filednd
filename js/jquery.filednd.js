@@ -1,6 +1,8 @@
-//
-//use jquery.widget
-//
+/*
+* jquery.filednd.js -v0.0.1
+* use "jQuery-ui -v1.12.1". need to include "widget.js" in it.
+* Copyright(C) rksan(https://github.com/rksan/jquery.filednd.git); MIT License.
+*/
 ( function( $ ) {
 
 	//is inner object
@@ -107,7 +109,7 @@
 			return $inner;
 		},
 
-		dropareatext: function( widget ) {
+		dropareatext: function _widget_dropareatext( widget ) {
 			var name = this.roles( 'name' );
 
 			var $drop = this.droparea( widget ),
@@ -696,6 +698,8 @@
 			return this._off( this.element, eventName );
 		},
 
+		//@original
+		//@param [text] : String
 		text: function widget_text( text ) {
 			var $text = _widget.dropareatext( this );
 
