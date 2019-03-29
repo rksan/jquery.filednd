@@ -35,6 +35,8 @@ HTML上の `<form>` 要素以下に `<input type="file">` 要素を配置する�
 
 ### options
 
+---
+
 #### types
 
 Type : String Array
@@ -98,11 +100,13 @@ Default : { classname objects }
 
 ### events
 
-jQuery.Widget で original event を定義するには、event 名に widget 名を含む必要がありますが、面倒なので省略できるようにしました。
+jQuery.Widget で original event を定義するには、event 名に widget 名を含む必要がありますが、面倒なので省略できるようにしました。面倒なので。（重要）
 
 `draghover()` は、内部では `filednddraghover()` で処理されますが、bind するときは `.filednd( 'on', { 'draghover': function(){} } )` の記述のみで、正確に bind & run されます。
 
 変わりに、 native event は bind できますが、正しく処理されないかもしれません。（未テスト）
+
+---
 
 #### draghover( \[$event\]\[, widget\] )
 
@@ -118,4 +122,61 @@ widget : jQuery FileDnD
 
 ファイルがドラッグされた際に発火するイベント。
 
-正しくは、`options.types` で指定した、許可する `DataTransfer.type` を、Drag & Hover させた時のみ発火します。
+正しくは、`options.types` で指定した、許可する `DataTransfer.types` を、Drag & Hover させた時のみ発火します。
+だんだん書くの面倒になってきた。
+
+#### dragfail( \[$event\]\[, widget\] )
+
+@param
+
+$event : jQuery Event object
+
+jQuery のイベントオブジェクト
+
+@param
+
+widget : jQuery FileDnD
+
+ファイルがドラッグされた際に発火するイベント。
+
+正しくは、`options.types` で指定していない `DataTransfer.types` を、Drag & Hover させた時のみ発火します。
+
+`draghover()` の逆みたいな。
+
+#### dropbefore( \[$event\]\[, widget\] )
+
+@param
+
+$event : jQuery Event object
+
+jQuery のイベントオブジェクト
+
+@param
+
+widget : jQuery FileDnD
+
+ファイルがドロップされた際に常に発火するイベント。
+
+正確に言うと、`options.types` で指定した、許可する `DataTransfer.types` を、Drag & Drop させた時のみ発火します。
+
+で、後述しますが、`dropbefore()` -> `dropdone()` or `dropfail()` -> `dropalways()`の順で動作します。
+
+役割としては、`dropdone()`の前に何かしらの処理をしたい時とか。
+
+#### dropdone( \[$event\]\[, widget\] )
+
+@param
+
+$event : jQuery Event object
+
+jQuery のイベントオブジェクト
+
+@param
+
+widget : jQuery FileDnD
+
+ファイルがドロップされた際に、許可されたファイルの種類だった場合、発火するイベント。
+
+正確に言うと、`options.accepts` で指定したファイルの種類が、Drop された時のみ発火します。
+
+Drop される前に判定しろと言いたいところですが、 `native drop()` イベント内でしか `DataTransfer.files` って参照できない仕様っぽい。ちなみに、`native dragover()` -> `native dragenter()` -> `native drop()` と event を正しい道順で通り、通った event を正しく cancel しないと、`native drop()` 自体が発火しません。 誰かが発狂してましたが、仕様なのです。
