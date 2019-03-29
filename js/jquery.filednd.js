@@ -720,7 +720,7 @@
 	} );
 
 	$(function(){
-		$(document).find('form').find('input[type=file]')[_widget.widgetfullname()]();
+		$(document).find('form').find('input[type=file]')[_widget.widgetname()]();
 	});
 
 } )( window.jQuery );
