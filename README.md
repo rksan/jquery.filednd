@@ -21,7 +21,7 @@ HTML上の `<form>` 要素以下に `<input type="file">` 要素を配置する�
 </head>
 <body>
 	<form action="">
-		<input type="file" name="imagefile" accept="imate/*">
+		<input type="file" name="imagefile" accept="image/*">
 	</form>
 </body>
 ```

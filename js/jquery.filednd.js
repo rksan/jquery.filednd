@@ -719,4 +719,8 @@
 		}
 	} );
 
+	$(function(){
+		$(document).find('form').find('input[type=file]')[_widget.widgetfullname()]();
+	});
+
 } )( window.jQuery );
