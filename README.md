@@ -98,6 +98,36 @@ Default : { classname objects }
 とりあえず用意してあるけど、内容については考えていない。
 ※変更は推奨しません。
 
+### methods
+
+#### on( handlers )
+
+@param
+
+handlers : object
+
+original event を bind する method。日本語なのに日本語表記が少ない。
+
+```
+$( 'input[type=file]' ).filednd( 'on', {
+	dropdone: function( $event ){
+		console.log( 'drop done!' );
+	}
+} );
+```
+
+#### off( eventName )
+
+@param
+
+eventName : string
+
+original event を unbind する。
+
+```
+$( 'input[type=file]' ).filednd( 'off', 'dropdone' );
+```
+
 ### events
 
 jQuery.Widget で original event を定義するには、event 名に widget 名を含む必要がありますが、面倒なので省略できるようにしました。面倒なので。（重要）
@@ -179,4 +209,36 @@ widget : jQuery FileDnD
 
 正確に言うと、`options.accepts` で指定したファイルの種類が、Drop された時のみ発火します。
 
-Drop される前に判定しろと言いたいところですが、 `native drop()` イベント内でしか `DataTransfer.files` って参照できない仕様っぽい。ちなみに、`native dragover()` -> `native dragenter()` -> `native drop()` と event を正しい道順で通り、通った event を正しく cancel しないと、`native drop()` 自体が発火しません。 誰かが発狂してましたが、仕様なのです。
+Drop される前に判定しろと言いたいところですが、 `native drop()` イベント内でしか `DataTransfer.files` って参照できない仕様っぽい。ちなみに、`native dragover()` -> `native dragenter()` -> `native drop()` と event を正しい道順で通り、通った event 内で `DataTransfer`を正しく設定し、native event を 正しく cancel しないと、`native drop()` 自体が発火しません。 誰かが発狂してましたが仕様なのです。
+
+
+#### dropfail( \[$event\]\[, widget\] )
+
+@param
+
+$event : jQuery Event object
+
+jQuery のイベントオブジェクト
+
+@param
+
+widget : jQuery FileDnD
+
+`dropdone()` の逆。
+
+
+#### dropalways( \[$event\]\[, widget\] )
+
+@param
+
+$event : jQuery Event object
+
+jQuery のイベントオブジェクト
+
+@param
+
+widget : jQuery FileDnD
+
+`dropbefore()`と同様。
+
+常に最後に呼び出されます。
