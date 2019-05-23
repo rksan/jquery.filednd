@@ -22,7 +22,7 @@ HTML上の `<form>` 要素以下に `<input type="file">` 要素を配置する�
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="https://rksan.github.io/js/jquery.filednd.js"></script>
+	<script type="text/javascript" src="https://rksan.github.io/jquery.filednd/js/jquery.filednd.js"></script>
 </head>
 <body>
 	<form action="">
