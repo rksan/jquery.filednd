@@ -198,6 +198,48 @@
 		},
 
 		//@param types : DataTransfer.types
+		//@return boolean
+		containsAcceptDataTransferType: function _widget_containsAcceptDataTransferType( types, widget ){
+			if ( !types ) {
+				return types;
+			}
+
+			var accepts = ( widget.option( 'types' ) || [] );
+
+			if ( typeof accepts === 'string' ) {
+				accepts = accepts.split( ',' );
+			}
+
+			if ( accepts.length === 0 ) {
+				//all accept
+				return true;
+			}
+
+			var isContains = false;
+
+			$.each( types, function( idx, type ) {
+				type = $.trim( type );
+
+				$.each( accepts, function( idx, accept ) {
+					accept = $.trim( accept );
+
+					if ( type === accept ) {
+						isContains = true;
+						return false;
+					}
+				} );
+
+				if ( isContains === false ) {
+					return false;
+				}
+
+			} );
+
+			return isContains;
+
+		},
+
+		//@param types : DataTransfer.types
 		unacceptDataTransferType: function _widget_unacceptDataTransferType( types, widget ) {
 			if ( !types ) {
 				return types;
@@ -247,13 +289,9 @@
 
 		//@param types : DataTransfer.types
 		IsAcceptDataTransferType: function _widget_IsAcceptDataTransferType( types, widget ) {
-			var unaccept = this.unacceptDataTransferType( types, widget );
+			var isAccept = this.containsDataTransferType( types, widget );
 
-			if ( unaccept ) {
-				return unaccept.length === 0 ? true : false;
-			} else {
-				return true;
-			}
+			return isAccept;
 		},
 
 		//@param files : DataTransfer.files
