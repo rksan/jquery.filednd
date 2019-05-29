@@ -77,6 +77,11 @@
 					.filednd( 'option', {
 						accepts: ['text/*', '.txt', '.text']
 					} );
+
+				var accepts = $( 'input[type=file]' ).filednd( 'option.accepts' );
+
+				console.log( '['+accepts.join(',')+']' );
+
 				return false;
 			});
 	} );
