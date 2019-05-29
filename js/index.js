@@ -16,6 +16,8 @@
 		//events demo
 		$filednd.filednd('on', {
 			'draghover': function($event, widget){
+				var types = $event.originalEvent.originalEvent.dataTransfer.types;
+				console.log( '['+types.join(',')+']' );
 				text.before = text.org + ' : draghover';
 				widget.text( text.before );
 			},
