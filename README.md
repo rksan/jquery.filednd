@@ -68,7 +68,7 @@ Default : [image/\*]
 ```
 $( 'input[type=file]' ).filednd( {
 	options: {
-		accepts: [image/*, .png]
+		accepts: ['image/*'', ''.png']
 	}
 } );
 ```
