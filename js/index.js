@@ -74,7 +74,7 @@
 		$document.find( '#btn5' )
 			.on( 'click', function( $event ){
 				$( 'input[type=file]' )
-					.filednd( 'options', {
+					.filednd( 'option', {
 						accepts: ['text/*', '.txt', '.text']
 					} );
 				return false;
