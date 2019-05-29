@@ -229,7 +229,7 @@
 					}
 				} );
 
-				if ( isContains === false ) {
+				if ( isContains === true ) {
 					return false;
 				}
 
