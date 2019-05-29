@@ -372,7 +372,9 @@
 					'dragover': function( $event ) {
 						var dt = $event.originalEvent.dataTransfer;
 						//dt.effectAllowed = "none";
-						dt.dropEffect = "none";
+						if( dt ){
+							dt.dropEffect = "none";
+						}
 						return _widget.events.cancel.call( this.document[ 0 ], $event, this );
 					},
 					'drop': function( $event, data ) {
@@ -456,7 +458,7 @@
 						role = _widget.roles( 'droparea' ),
 						//Find a drop area that should be the parent element
 						$parent = $( related )
-						.closest( '[' + name + '=' + role + ']' );
+							.closest( '[' + name + '=' + role + ']' );
 
 					//If a drop area is found as a parent element,
 					//it can be determined that it is a drag in the drop area
