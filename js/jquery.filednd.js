@@ -1,5 +1,5 @@
 /*
- * jquery.filednd.js -v0.0.1
+ * jquery.filednd.js -v0.0.2
  * use "jQuery" -v3.3.1 over.
  * use "jQuery-ui -v1.12.1". need to include "widget.js" in it.
  * Copyright(C) rksan(https://github.com/rksan/jquery.filednd.git); MIT License.
