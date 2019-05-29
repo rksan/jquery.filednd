@@ -427,7 +427,7 @@
 					dt = $event.originalEvent.dataTransfer;
 
 				//Check if it is allowable Datatransfer
-				if ( _widget.IsAcceptDataTransferType( dt.types, widget ) === true ) {
+				if ( dt && _widget.IsAcceptDataTransferType( dt.types, widget ) === true ) {
 					dt.allowEffect = "copy";
 					dt.dropEffect = "copy";
 				} else {
@@ -485,7 +485,7 @@
 						$drop = widget.droparea();
 
 					//Check if it is allowable Datatransfer
-					if ( _widget.IsAcceptDataTransferType( dt.types, widget ) === true ) {
+					if ( dt && _widget.IsAcceptDataTransferType( dt.types, widget ) === true ) {
 						//drag done
 						$drop.removeClass( css.fail );
 						$drop.addClass( css.hover );
@@ -564,7 +564,7 @@
 
 					var dt = $event.originalEvent.dataTransfer;
 
-					if ( _widget.IsAcceptFiles( dt.files, widget ) === true ) {
+					if ( dt && _widget.IsAcceptFiles( dt.files, widget ) === true ) {
 
 						add.push( css.done );
 						rmv.push( css.fail );
