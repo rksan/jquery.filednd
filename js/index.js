@@ -89,6 +89,10 @@
 
 				if( handler ){
 					result = handler.apply(this, arguments);
+
+					if( data.index < handlers.length ){
+						data.index = 0;
+					}
 				}
 
 				$this.data('clickToggleData', data);
