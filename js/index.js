@@ -115,7 +115,7 @@
 						widget = $( 'input[type=file]' ).filednd( 'widget' ),
 						widget_accepts = widget.options( 'accepts' );
 
-					console.log( 'accepts = ['+accepts.join(',')+'], widget_accepts = ['+widget_accepts.join(',')+'] );
+					console.log( 'accepts = ['+accepts.join(',')+'], widget_accepts = ['+widget_accepts.join(',')+']' );
 
 					$( this ).closest('div').find('p').text('Accepting : ' + '['+accepts.join(',')+']');
 
@@ -132,7 +132,7 @@
 						widget = $( 'input[type=file]' ).filednd( 'widget' ),
 						widget_accepts = widget.options( 'accepts' );
 
-					console.log( 'accepts = ['+accepts.join(',')+'], widget_accepts = ['+widget_accepts.join(',')+'] );
+					console.log( 'accepts = ['+accepts.join(',')+'], widget_accepts = ['+widget_accepts.join(',')+']' );
 
 					console.log( '['+accepts.join(',')+']' );
 
