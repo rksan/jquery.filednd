@@ -108,12 +108,13 @@
 
 					$( 'input[type=file]' )
 						.filednd( 'option', {
-							accepts: ['image/*', '.ping']
+							'accept': ['image/*', '.ping']
 						} );
 
-					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' ),
-						widget = $( 'input[type=file]' ).filednd( 'widget' ),
-						widget_accepts = widget.option( 'accepts' );
+					var $instance = $( 'input[type=file]' ).filednd( 'instance' ),
+						accepts = $instance.option( 'accept' ),
+						widget = $instance.widget(),
+						widget_accepts = widget.option( 'accept' );
 
 					console.log( 'accepts = ['+accepts.join(',')+'], widget_accepts = ['+widget_accepts.join(',')+']' );
 
@@ -125,12 +126,13 @@
 
 					$( 'input[type=file]' )
 						.filednd( 'option', {
-							accepts: ['text/*', '.txt', '.text']
+							'accept': ['text/*', '.txt', '.text']
 						} );
 
-					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' ),
-						widget = $( 'input[type=file]' ).filednd( 'widget' ),
-						widget_accepts = widget.option( 'accepts' );
+						var $instance = $( 'input[type=file]' ).filednd( 'instance' ),
+							accepts = $instance.option( 'accept' ),
+							widget = $instance.widget(),
+							widget_accepts = widget.option( 'accept' );
 
 					console.log( 'accepts = ['+accepts.join(',')+'], widget_accepts = ['+widget_accepts.join(',')+']' );
 
