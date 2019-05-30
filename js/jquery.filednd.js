@@ -697,6 +697,10 @@
 			return this._off( this.element, eventName );
 		},
 
+		widget: function(){
+			return _wieget;
+		},
+
 		//@original
 		//@param [text] : String
 		text: function widget_text( text ) {
