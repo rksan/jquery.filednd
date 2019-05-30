@@ -273,7 +273,7 @@
 				var symbole = Symbol( file );
 
 				if ( !param[ symbole ] ) {
-					var isAccept = false;
+					var isAccept = true;
 
 					$.each( accepts, function( idx, accept ) {
 						accept = _trim( accept );
@@ -289,8 +289,8 @@
 							text = file.type;
 						}
 
-						if ( text.match( reg ) ) {
-							isAccept = true;
+						if ( !text.match( reg ) ) {
+							isAccept = false;
 							return false;
 						}
 
