@@ -3,10 +3,10 @@
 		var $document = $( document ),
 			$file = $document.find( 'input[type=file]' ),
 			//Initialize
-			$filednd = $file.filednd();
+			$widget = $file.filednd( 'instance');
 
 		var text = {
-			org: $filednd.filednd( 'text' ),
+			org: $widget.text(),
 			before: '',
 			done: '',
 			fail: '',
@@ -14,7 +14,7 @@
 		};
 
 		//events demo
-		$filednd.filednd('on', {
+		$widget.filednd('on', {
 			'draghover': function($event, widget){
 				var types = $event.originalEvent.originalEvent.dataTransfer.types;
 				console.log( '['+types.join(',')+']' );
@@ -132,7 +132,7 @@
 
 					return false;
 				}
-			);
+			).closest('div').find('p').text( '[' + $widget.option( 'accept' ).join(',') + ']' );
 
 	} );
 } )( window.jQuery );
