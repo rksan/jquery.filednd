@@ -106,14 +106,11 @@
 			.doToggle(
 				function($event){
 
-					$( 'input[type=file]' )
-						.filednd( 'option', {
-							'accept': ['image/*', '.ping']
-						} );
+					var $widget = $( 'input[type=file]' ).filednd( 'instance' );
 
-					var $instance = $( 'input[type=file]' ).filednd( 'instance' ),
-						accepts = $instance.option( 'accept' ),
-						widget = $instance.widget();
+					$widget.option('accept', ['image/*', '.ping']);
+
+					var accepts = $widget.option( 'accept' );
 
 					console.log( 'accepts = ['+accepts.join(',')+']' );
 
@@ -123,18 +120,13 @@
 				},
 				function($event){
 
-					$( 'input[type=file]' )
-						.filednd( 'option', {
-							'accept': ['text/*', '.txt', '.text']
-						} );
+					var $widget = $( 'input[type=file]' ).filednd( 'instance' );
 
-						var $instance = $( 'input[type=file]' ).filednd( 'instance' ),
-							accepts = $instance.option( 'accept' ),
-							widget = $instance.widget();
+					$widget.option('accept', ['text/*', '.txt', '.text']);
+
+					var accepts = $widget.option( 'accept' );
 
 					console.log( 'accepts = ['+accepts.join(',')+']' );
-
-					console.log( '['+accepts.join(',')+']' );
 
 					$( this ).closest('div').find('p').text('Accepting : ' + '['+accepts.join(',')+']');
 
