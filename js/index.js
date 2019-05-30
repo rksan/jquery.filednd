@@ -71,8 +71,41 @@
 				return false;
 			} );
 
+		//jQuery. make it toggle
+		$.fn.makeToggle = function(handler1, handler2){
+
+			var $this = $(this);
+
+			$this.data( {
+				'clickToggleData': {
+					'handlers': arguments,
+					'counter': 0
+				}
+			});
+
+			var $this.on('click', function($event){
+				var $this = $(this),
+					data = $this.data('clickToggleData') || {},
+					handlers = data.handlers,
+					counter = data.counter,
+					handler = handlers[counter],
+					result = undefined;
+
+				if( handler ){
+					result = handler.apply(this, arguments);
+				}
+
+				data.counter++;
+
+				$this.data('clickToggleData', data);
+
+				return result;
+			});
+
+		};
+
 		$document.find( '#btn5' )
-			.toggle(
+			.makeToggle(
 				function($event){
 					$( 'input[type=file]' )
 						.filednd( 'option', {
