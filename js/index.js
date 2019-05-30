@@ -90,7 +90,7 @@
 				if( handler ){
 					result = handler.apply(this, arguments);
 
-					if( data.index < handlers.length ){
+					if( handlers.length <= data.index ){
 						data.index = 0;
 					}
 				}
