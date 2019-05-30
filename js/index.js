@@ -71,7 +71,7 @@
 				return false;
 			} );
 
-		//jQuery. make it toggle
+		//jQuery 3.0 over. make it toggle.
 		$.fn.doToggle = function(handler1, handler2){
 
 			$(this).data( {
@@ -105,22 +105,30 @@
 		$document.find( '#btn5' )
 			.doToggle(
 				function($event){
-					$( 'input[type=file]' )
+					var $this = $( 'input[type=file]' );
+
+					$this
 						.filednd( 'option', {
 							accepts: ['image/*', '.ping']
 						} );
 
-					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
+					$this.text('toggle text/*');
+					var accepts = $this.filednd( 'option', 'accepts' );
 
 					console.log( '['+accepts.join(',')+']' );
+
 
 					return false;
 				},
 				function($event){
-					$( 'input[type=file]' )
+					var $this = $( 'input[type=file]' );
+
+					$this
 						.filednd( 'option', {
 							accepts: ['text/*', '.txt', '.text']
 						} );
+
+					$this.text('toggle image/*');
 
 					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
 
