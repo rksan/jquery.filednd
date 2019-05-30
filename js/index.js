@@ -132,6 +132,20 @@
 					$( this ).closest('div').find('p').text('Accepting : ' + '['+accepts.join(',')+']');
 
 					return false;
+				},
+				function($event){
+
+					var $widget = $( 'input[type=file]' ).filednd( 'instance' );
+
+					$widget.option('accept', ['image/*']);
+
+					var accepts = $widget.option( 'accept' );
+
+					console.log( 'accepts = ['+accepts.join(',')+']' );
+
+					$( this ).closest('div').find('p').text('Accepting : ' + '['+accepts.join(',')+']');
+
+					return false;
 				}
 			).closest('div').find('p').text( 'Accepting : ' + '[' + $widget.option( 'accept' ).join(',') + ']' );
 
