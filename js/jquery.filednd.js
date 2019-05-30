@@ -698,7 +698,7 @@
 		},
 
 		widget: function(){
-			return _wieget;
+			return _widget;
 		},
 
 		//@original
