@@ -100,6 +100,7 @@
 				return result;
 			});
 
+			return this;
 		};
 
 		$document.find( '#btn5' )
@@ -108,7 +109,7 @@
 
 					var $widget = $( 'input[type=file]' ).filednd( 'instance' );
 
-					$widget.option('accept', ['image/*', '.ping']);
+					$widget.option('accept', ['image/*', '.png']);
 
 					var accepts = $widget.option( 'accept' );
 
