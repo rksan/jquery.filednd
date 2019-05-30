@@ -14,7 +14,7 @@
 		};
 
 		//events demo
-		$widget.filednd('on', {
+		$widget.on( {
 			'draghover': function($event, widget){
 				var types = $event.originalEvent.originalEvent.dataTransfer.types;
 				console.log( '['+types.join(',')+']' );
