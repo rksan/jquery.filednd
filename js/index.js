@@ -111,9 +111,11 @@
 							accepts: ['image/*', '.ping']
 						} );
 
-					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
+					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' ),
+						widget = $( 'input[type=file]' ).filednd( 'widget' ),
+						widget_accepts = widget.options( 'accepts' );
 
-					console.log( '['+accepts.join(',')+']' );
+					console.log( 'accepts = ['+accepts.join(',')+'], widget_accepts = ['+widget_accepts.join(',')+'] );
 
 					$( this ).closest('div').find('p').text('Accepting : ' + '['+accepts.join(',')+']');
 
@@ -126,7 +128,11 @@
 							accepts: ['text/*', '.txt', '.text']
 						} );
 
-					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
+					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' ),
+						widget = $( 'input[type=file]' ).filednd( 'widget' ),
+						widget_accepts = widget.options( 'accepts' );
+
+					console.log( 'accepts = ['+accepts.join(',')+'], widget_accepts = ['+widget_accepts.join(',')+'] );
 
 					console.log( '['+accepts.join(',')+']' );
 
