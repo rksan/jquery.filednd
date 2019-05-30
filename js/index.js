@@ -105,14 +105,14 @@
 		$document.find( '#btn5' )
 			.doToggle(
 				function($event){
-					var $this = $( 'input[type=file]' );
 
-					$this
+					$( 'input[type=file]' )
 						.filednd( 'option', {
 							accepts: ['image/*', '.ping']
 						} );
 
-					$this.closest('div').find('p').text('toggle text/*');
+					$( this ).closest('div').find('p').text('toggle text/*');
+
 					var accepts = $this.filednd( 'option', 'accepts' );
 
 					console.log( '['+accepts.join(',')+']' );
@@ -121,14 +121,13 @@
 					return false;
 				},
 				function($event){
-					var $this = $( 'input[type=file]' );
 
-					$this
+					$( 'input[type=file]' )
 						.filednd( 'option', {
 							accepts: ['text/*', '.txt', '.text']
 						} );
 
-					$this.closest('div').find('p').text('toggle image/*');
+					$( this ).closest('div').find('p').text('toggle image/*');
 
 					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
 
