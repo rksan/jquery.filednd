@@ -111,12 +111,11 @@
 							accepts: ['image/*', '.ping']
 						} );
 
-					$( this ).closest('div').find('p').text('toggle text/*');
-
 					var accepts = $this.filednd( 'option', 'accepts' );
 
 					console.log( '['+accepts.join(',')+']' );
 
+					$( this ).closest('div').find('p').text('Accepting : ' + '['+accepts.join(',')+']');
 
 					return false;
 				},
@@ -127,11 +126,11 @@
 							accepts: ['text/*', '.txt', '.text']
 						} );
 
-					$( this ).closest('div').find('p').text('toggle image/*');
-
 					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
 
 					console.log( '['+accepts.join(',')+']' );
+
+					$( this ).closest('div').find('p').text('Accepting : ' + '['+accepts.join(',')+']');
 
 					return false;
 				}
