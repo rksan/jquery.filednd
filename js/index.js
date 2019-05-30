@@ -133,7 +133,7 @@
 
 					return false;
 				}
-			).closest('div').find('p').text( '[' + $widget.option( 'accept' ).join(',') + ']' );
+			).closest('div').find('p').text( 'Accepting : ' + '[' + $widget.option( 'accept' ).join(',') + ']' );
 
 	} );
 } )( window.jQuery );
