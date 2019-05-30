@@ -113,7 +113,7 @@
 
 					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' ),
 						widget = $( 'input[type=file]' ).filednd( 'widget' ),
-						widget_accepts = widget.options( 'accepts' );
+						widget_accepts = widget.option( 'accepts' );
 
 					console.log( 'accepts = ['+accepts.join(',')+'], widget_accepts = ['+widget_accepts.join(',')+']' );
 
@@ -130,7 +130,7 @@
 
 					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' ),
 						widget = $( 'input[type=file]' ).filednd( 'widget' ),
-						widget_accepts = widget.options( 'accepts' );
+						widget_accepts = widget.option( 'accepts' );
 
 					console.log( 'accepts = ['+accepts.join(',')+'], widget_accepts = ['+widget_accepts.join(',')+']' );
 
