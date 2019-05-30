@@ -72,17 +72,32 @@
 			} );
 
 		$document.find( '#btn5' )
-			.on( 'click', function( $event ){
-				$( 'input[type=file]' )
-					.filednd( 'option', {
-						accepts: ['text/*', '.txt', '.text']
-					} );
+			.toggle(
+				function($event){
+					$( 'input[type=file]' )
+						.filednd( 'option', {
+							accepts: ['image/*', '.ping']
+						} );
 
-				var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
+					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
 
-				console.log( '['+accepts.join(',')+']' );
+					console.log( '['+accepts.join(',')+']' );
 
-				return false;
-			});
+					return false;
+				},
+				function($event){
+					$( 'input[type=file]' )
+						.filednd( 'option', {
+							accepts: ['text/*', '.txt', '.text']
+						} );
+
+					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
+
+					console.log( '['+accepts.join(',')+']' );
+
+					return false;
+				}
+			);
+
 	} );
 } )( window.jQuery );
