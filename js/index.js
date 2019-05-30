@@ -112,7 +112,7 @@
 							accepts: ['image/*', '.ping']
 						} );
 
-					$this.text('toggle text/*');
+					$this.next().text('toggle text/*');
 					var accepts = $this.filednd( 'option', 'accepts' );
 
 					console.log( '['+accepts.join(',')+']' );
@@ -128,7 +128,7 @@
 							accepts: ['text/*', '.txt', '.text']
 						} );
 
-					$this.text('toggle image/*');
+					$this.next().text('toggle image/*');
 
 					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
 
