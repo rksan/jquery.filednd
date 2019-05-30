@@ -111,7 +111,7 @@
 							accepts: ['image/*', '.ping']
 						} );
 
-					var accepts = $this.filednd( 'option', 'accepts' );
+					var accepts = $( 'input[type=file]' ).filednd( 'option', 'accepts' );
 
 					console.log( '['+accepts.join(',')+']' );
 
